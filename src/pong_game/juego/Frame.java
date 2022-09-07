@@ -10,7 +10,7 @@ public class Frame extends JFrame {
     private Tablero tablero;
 
     public Frame() {
-        tablero = new Tablero();
+        tablero = new Tablero(this);
         this.add(tablero);
         this.setTitle("Pong Game");
         this.setResizable(false);

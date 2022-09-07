@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Dm/Documents/NetBeansProjects/PONG_GAME/src/pong_game/juego/Bola.java</file>
-            <file>file:/C:/Users/Dm/Documents/NetBeansProjects/PONG_GAME/src/pong_game/Menu.java</file>
-            <file>file:/C:/Users/Dm/Documents/NetBeansProjects/PONG_GAME/src/pong_game/PONG_GAME.java</file>
-            <file>file:/C:/Users/Dm/Documents/NetBeansProjects/PONG_GAME/src/pong_game/menu_panel.java</file>
+            <file>file:/C:/Users/Dm/Documents/NetBeansProjects/PONG_GAME/src/pong_game/juego/Frame.java</file>
+            <file>file:/C:/Users/Dm/Documents/NetBeansProjects/PONG_GAME/src/pong_game/juego/Puntaje.java</file>
+            <file>file:/C:/Users/Dm/Documents/NetBeansProjects/PONG_GAME/src/pong_game/juego/Raqueta.java</file>
+            <file>file:/C:/Users/Dm/Documents/NetBeansProjects/PONG_GAME/src/pong_game/juego/Tablero.java</file>
         </group>
     </open-files>
 </project-private>

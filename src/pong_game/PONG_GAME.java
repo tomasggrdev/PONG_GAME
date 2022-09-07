@@ -24,11 +24,7 @@ public class PONG_GAME {
         JFrame menu = new Menu();
         menu.setVisible(true);
         
-        try{
-            Thread.sleep(5000);
-        } catch (Exception e){
-            
-        }
+        
         
         
         

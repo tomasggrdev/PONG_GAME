@@ -4,28 +4,36 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
+import pong_game.Menu;
+
+import pong_game.vistas_ganador.*;
 
 
 public class Tablero extends JPanel implements Runnable {
-
+    
     static final int WITH =1500;
     static final int HEIGHT = (int)(Tablero.WITH*(0.5555));
     static final Dimension TAMANO_PANTALLA = new Dimension(WITH,HEIGHT);
     static final int DIAMETRO_BOLA = 20;
     static final int ANCHO_RAQUETA = 25;
-    static final int Alto_RAQUETA = 110;
+    static final int Alto_RAQUETA = 130;
+    private JFrame frame;
     Thread hiloJuego ;
+    Boolean flagThread;
     Image imagen;
     Graphics graficos;
     
-    Thread musicaJuego;
     Random random;
     Raqueta raqueta1;
     Raqueta raqueta2;
     Bola bola;
     Puntaje puntaje;
+    private int puntosParaGanar;
 
-    public Tablero(){
+    public Tablero(JFrame frame){
+        puntosParaGanar = 2;
+        this.frame = frame;
+        flagThread = true;
         establecerRaquetas();
         establecerBola();
         puntaje = new Puntaje(WITH,HEIGHT);
@@ -35,12 +43,7 @@ public class Tablero extends JPanel implements Runnable {
 
         hiloJuego = new Thread(this);
         hiloJuego.start();
-
-        
-        
-
-
-    }
+        }
 
     public void establecerBola(){
         random = new Random();
@@ -107,8 +110,25 @@ public class Tablero extends JPanel implements Runnable {
             establecerRaquetas();
             establecerBola();
         }
-        if(puntaje.getJugador1() == 10 || puntaje.getJugador2() == 10){
-            musicaJuego.stop();
+        if(puntaje.getJugador1() == puntosParaGanar || puntaje.getJugador2() == puntosParaGanar){
+            frame.dispose();
+            frame.invalidate();
+            flagThread = false;
+            
+            if(puntaje.getJugador1() == puntosParaGanar){
+                frame = new BlueWin();
+            } else {
+                frame = new RedWin();
+            }
+            frame.setVisible(true);
+            try {
+                Thread.sleep(3000);
+            }catch(Exception e){
+                
+            }
+            frame.dispose();
+           
+        
         }
 
     }
@@ -118,7 +138,7 @@ public class Tablero extends JPanel implements Runnable {
         double fotogramasPorSegundo = 60.0;
         double nanoSegundo = 1000000000/ fotogramasPorSegundo;
         double delta = 0;
-        while(true){
+        while(flagThread){
             long now = System.nanoTime();
             delta += (now - ultimaVez)/nanoSegundo;
             ultimaVez = now;
