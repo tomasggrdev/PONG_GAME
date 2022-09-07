@@ -6,6 +6,8 @@
 import javax.swing.JFrame;
 import pong_game.Menu;
 import pong_game.juego.Frame;
+import pong_game.juego.Tablero;
+import pong_game.menu_panel;
 
 
 /**
@@ -19,9 +21,26 @@ public class PONG_GAME {
      */
     public static void main(String[] args) {
         
-        JFrame frame = new Menu();
-        frame.setVisible(true);
-        frame = new Frame();
+        JFrame menu = new Menu();
+        menu.setVisible(true);
+        
+        try{
+            Thread.sleep(5000);
+        } catch (Exception e){
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+       
+        
+        
+      
+        
         
                 
     }
