@@ -1,12 +1,13 @@
 package pong_game.juego;
 
+import pong_game.vistas.BlueWin;
+import pong_game.vistas.RedWin;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
-import pong_game.Menu;
+import pong_game.vistas.Menu;
 
-import pong_game.vistas_ganador.*;
 
 
 public class Tablero extends JPanel implements Runnable {
@@ -18,6 +19,7 @@ public class Tablero extends JPanel implements Runnable {
     static final int ANCHO_RAQUETA = 25;
     static final int Alto_RAQUETA = 130;
     private JFrame frame;
+    private int gameMode;
     Thread hiloJuego ;
     Boolean flagThread;
     Image imagen;
@@ -29,14 +31,33 @@ public class Tablero extends JPanel implements Runnable {
     Bola bola;
     Puntaje puntaje;
     private int puntosParaGanar;
+    private String nombre;
 
-    public Tablero(JFrame frame){
+    public Tablero(Frame frame, int gameMode){
+        this.frame = (Frame) frame;
+        this.gameMode = gameMode;
         puntosParaGanar = 2;
-        this.frame = frame;
+        puntaje = new Puntaje(WITH,HEIGHT,gameMode);
         flagThread = true;
         establecerRaquetas();
         establecerBola();
-        puntaje = new Puntaje(WITH,HEIGHT);
+        this.setFocusable(true);
+        this.addKeyListener(new ActionListener());
+        this.setPreferredSize(TAMANO_PANTALLA);
+
+        hiloJuego = new Thread(this);
+        hiloJuego.start();
+        }
+    
+    public Tablero(Frame frame, int gameMode, String nombre){
+        this.nombre = nombre;
+        this.frame = (Frame) frame;
+        this.gameMode = gameMode;
+        puntosParaGanar = 2;
+        puntaje = new Puntaje(WITH,HEIGHT,gameMode);
+        flagThread = true;
+        establecerRaquetas();
+        establecerBola();
         this.setFocusable(true);
         this.addKeyListener(new ActionListener());
         this.setPreferredSize(TAMANO_PANTALLA);
@@ -50,8 +71,8 @@ public class Tablero extends JPanel implements Runnable {
         bola = new Bola(WITH/2 - DIAMETRO_BOLA/2, random.nextInt(HEIGHT - DIAMETRO_BOLA/2),DIAMETRO_BOLA,DIAMETRO_BOLA);
     }
     public void establecerRaquetas(){
-        raqueta1 = new Raqueta(0,HEIGHT/2 - (Alto_RAQUETA/2),ANCHO_RAQUETA,Alto_RAQUETA,1);
-        raqueta2 = new Raqueta(WITH - ANCHO_RAQUETA,HEIGHT/2 - (Alto_RAQUETA/2),ANCHO_RAQUETA,Alto_RAQUETA,2);
+        raqueta1 = new Raqueta(0,HEIGHT/2 - (Alto_RAQUETA/2),ANCHO_RAQUETA,Alto_RAQUETA,1, (pong_game.juego.Frame) frame, bola);
+        raqueta2 = new Raqueta(WITH - ANCHO_RAQUETA,HEIGHT/2 - (Alto_RAQUETA/2),ANCHO_RAQUETA,Alto_RAQUETA,2, (pong_game.juego.Frame) frame, bola);
 
     }
 
@@ -71,7 +92,11 @@ public class Tablero extends JPanel implements Runnable {
     }
     public void mover(){
         raqueta1.mover();
-        raqueta2.mover();
+        if(gameMode == 1){
+            raqueta2.y = bola.y;
+        }else{
+            raqueta2.mover();
+        }
         bola.mover();
     }
     public void chekearColision(){
@@ -111,6 +136,11 @@ public class Tablero extends JPanel implements Runnable {
             establecerBola();
         }
         if(puntaje.getJugador1() == puntosParaGanar || puntaje.getJugador2() == puntosParaGanar){
+            
+            if(gameMode == 1){
+                puntaje.guardarPuntaje(nombre);
+            }
+            
             frame.dispose();
             frame.invalidate();
             flagThread = false;
@@ -127,6 +157,10 @@ public class Tablero extends JPanel implements Runnable {
                 
             }
             frame.dispose();
+            
+            frame = new Menu();
+            frame.setVisible(true);
+            
            
         
         }

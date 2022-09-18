@@ -9,8 +9,22 @@ public class Frame extends JFrame {
 
     private Tablero tablero;
 
-    public Frame() {
-        tablero = new Tablero(this);
+    public Frame(int gameMode) {
+        
+        tablero = new Tablero(this,gameMode);
+        this.add(tablero);
+        this.setTitle("Pong Game");
+        this.setResizable(false);
+        this.setBackground(Color.black);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.pack();
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
+    }
+    
+    public Frame(int gameMode, String nombre) {
+        
+        tablero = new Tablero(this,gameMode,nombre);
         this.add(tablero);
         this.setTitle("Pong Game");
         this.setResizable(false);
@@ -21,4 +35,7 @@ public class Frame extends JFrame {
         this.setLocationRelativeTo(null);
     }
 
+    
+    
+    
 }

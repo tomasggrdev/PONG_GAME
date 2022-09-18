@@ -8,11 +8,13 @@ public class Raqueta extends Rectangle {
     private int id;
     private int velocidadY;
     private int velocidad = 10;
+    private Frame frame;
 
 
-    public Raqueta(int x, int y, int anchoRaqueta, int altoRaqueta, int id) {
+    public Raqueta(int x, int y, int anchoRaqueta, int altoRaqueta, int id, Frame frame, Bola bola) {
         super(x, y, anchoRaqueta, altoRaqueta);
         this.id = id;
+        this.frame = frame;
     }
 
     public void cambiarDireccionY(int direccionY) {
@@ -20,7 +22,7 @@ public class Raqueta extends Rectangle {
     }
 
     public void mover() {
-        y = y + velocidadY;
+            y = y + velocidadY;
     }
 
     public void dibujar(Graphics g) {

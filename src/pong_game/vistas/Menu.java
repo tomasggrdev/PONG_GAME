@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package pong_game;
+package pong_game.vistas;
 
 import javax.swing.JFrame;
 import pong_game.juego.*;
@@ -45,6 +45,11 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(28, 11, 222));
 
         jButton1.setText("UN JUGADOR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("PUNTAJES");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -120,13 +125,16 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        tablero = new VistaRecords();
+        tablero.setVisible(true);
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.dispose();
-        tablero_multoplayer = new Frame();
-        tablero_multoplayer.setVisible(true);
+        tablero = new Frame(2);
+        tablero.setVisible(true);
         
         
        
@@ -136,6 +144,12 @@ public class Menu extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+        tablero = new Formulario();
+        tablero.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,7 +185,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
     }
-    private JFrame tablero_multoplayer;
+    private JFrame tablero;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
